@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let nextSquares = Array.from(document.querySelectorAll(".mini_grid div"));
     const ScoreDisplay = document.getElementById('score')
     const StartBtn = document.getElementById('start')
-    const displaywidth = 4;
-    let displayindex = 0;
+    let timerID ;
 
     // tetraminos 
     const ltmno = [
@@ -63,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let [tmno, rot] = random_rotation();
     let [nexttmno,nextrot] = random_rotation();
     let nextrotation = nexttmnos[nexttmno];
-    draw_next();
     console.log(nextSquares);
     function random_pos() {
         return parseInt(Math.random() * 10 % 7);
@@ -106,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
-    let timerID = setInterval(moveDown, 500);
+    
     document.addEventListener('keyup', control)
     function control(events) {
         if (events.key === "ArrowLeft") {
@@ -206,4 +204,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+    StartBtn.addEventListener('click',()=>{
+        if(timerID){
+            clearInterval(timerID);
+            timerID = null;
+        }
+        else{
+            draw();
+            draw_next();
+            timerID = setInterval(moveDown,700);
+        }
+    })
 }) 
