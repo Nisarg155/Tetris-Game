@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector(".grid");
     let squares = Array.from(document.querySelectorAll(".grid div"));
     let nextSquares = Array.from(document.querySelectorAll(".mini_grid div"));
-    const ScoreDisplay = document.getElementById('score')
+    const ScoreDisplay = document.getElementById('score_disp')
     const StartBtn = document.getElementById('start')
     let timerID ;
     let currentcolor = random_colour();
@@ -260,6 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 {
                     squares[row[l]].classList.remove('taken');
                     squares[row[l]].classList.remove('tetraminos');
+                    squares[row[l]].style.backgroundColor = '';
                 }
                 const newsquares = squares.splice(i,width);
                 squares = newsquares.concat(squares);

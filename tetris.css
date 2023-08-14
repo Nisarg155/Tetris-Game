@@ -1,20 +1,62 @@
+/*help me to add good stiling to the game*/
+body{
+    background-image: url(background.jpeg);
+    /*adjust background image to fit the page*/
+}
+
+#score_div{
+    width: 200px;
+    height: 200px;
+    background-color: plum;
+    border-radius: 20px;
+    margin-right: 50px;
+    /*align the content of this container to centre*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#score_div h3{
+    font-size: 30px;
+    color: white;
+    font-style: italic;
+}
+
+/*give color and size to start button id start present inside score_id  */
+#start{
+    background-color: orange;
+    border: none;
+    font-size: medium;
+    height: 30px;
+    font-style: italic;
+}
+
 .container{
 display: flex;
+/* center the container  from all directions*/
+justify-content: center;
+align-items: center;
+height: 100vh;
+/* center the container  from all directions*/
 }
 
 .grid{
-    width: 200px;
-    height: 400px;
-    background-color: yellow;
+    width: 420px;
+    height: 840px;
+    background-color:white;
     display: flex;
     flex-wrap: wrap;
+    border:gray 1px solid;
+    border-radius: 5px;
 }
 
-.grid div{
-    height: 20px;
-    width: 20px;
+.grid div {
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+    border: 1px solid gray;
 }
-
 
 .tetraminos{
     background-color: blue;
@@ -22,14 +64,14 @@ display: flex;
 
 .mini_grid{
     margin-left:50px;
-    width: 80px;
-    height: 80px;
+    width: 160px;
+    height: 160px;
     display: flex;
     flex-wrap: wrap;
-    background-color: yellow;
+    background-color: white;
 }
 
 .mini_grid div{
-        height: 20px;
-        width: 20px;
+        height: 40px;
+        width: 40px;
 }
