@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const width = 10;
-    const gird = document.querySelector(".grid");
+    const grid = document.querySelector(".grid");
     let squares = Array.from(document.querySelectorAll(".grid div"));
     let nextSquares = Array.from(document.querySelectorAll(".mini_grid div"));
     const ScoreDisplay = document.getElementById('score')
@@ -201,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
             [nexttmno,nextrot] = [newnexttmno,newnextrot];
             
             draw_next();
+            score();
         }
     }
 
@@ -216,4 +217,34 @@ document.addEventListener('DOMContentLoaded', () => {
             timerID = setInterval(moveDown,700);
         }
     })
+
+
+
+    function score(){
+        let row = [];
+        for(let i = 0;i<199;i += width)
+        {
+            row.splice(0);
+            for(let j = 0;j<10 ;j++ )
+            {
+                row.push(i+j);
+            }
+    
+            if(row.every(index => squares[index].classList.contains('taken')))
+            {
+                ScoreDisplay.innerHTML = parseInt(ScoreDisplay.innerHTML) + 10;
+    
+                for(let l = 0;l<10;l++)
+                {
+                    squares[row[l]].classList.remove('taken');
+                    squares[row[l]].classList.remove('tetraminos');
+                }
+                const newsquares = squares.splice(i,width);
+                squares = newsquares.concat(squares);
+                squares.forEach(cell => grid.appendChild(cell));
+            }
+        }
+    }
+
+
 }) 
