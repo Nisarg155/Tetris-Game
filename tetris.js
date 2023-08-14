@@ -8,6 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const ScoreDisplay = document.getElementById('score')
     const StartBtn = document.getElementById('start')
     let timerID ;
+    let currentcolor = random_colour();
+    let nextcolor = random_colour();
+    
+
+    const colours = [
+        'orange',
+        'red',
+        'purple',
+        'green',
+        'blue'
+    ]
 
     // tetraminos 
     const ltmno = [
@@ -73,6 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return [tmno, rot];
     }
 
+    function random_colour() {
+        return parseInt(Math.random() * 10 % 5);
+    }
+
     let currentpos = random_pos();
 
     let rotation = tetraminos[tmno][rot];
@@ -80,12 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function draw() {
         rotation.forEach(index => {
             squares[currentpos + index].classList.add('tetraminos');
+            squares[currentpos + index].style.backgroundColor = colours[currentcolor];
         })
     }
 
     function draw_next() {
         nextrotation.forEach(index => {
             nextSquares[index].classList.add('tetraminos');
+            nextSquares[index].style.backgroundColor = colours[nextcolor];
         })
     }
 
@@ -94,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         nextrotation.forEach(index => {
             nextSquares[index].classList.remove('tetraminos');
+            nextSquares[index].style.backgroundColor = '';
         })
     }
 
@@ -101,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function undraw() {
         rotation.forEach(index => {
             squares[currentpos + index].classList.remove('tetraminos');
+            squares[currentpos + index].style.backgroundColor = '';
         })
     }
 
@@ -192,10 +211,12 @@ document.addEventListener('DOMContentLoaded', () => {
             })
 
             currentpos = random_pos();
+            currentcolor = nextcolor;
             [tmno,rot] = [nexttmno,nextrot];
             rotation = tetraminos[tmno][rot];
             draw();
             undraw_next();
+            nextcolor = random_colour();
             let [newnexttmno,newnextrot] = random_rotation();
             nextrotation = nexttmnos[newnexttmno];
             [nexttmno,nextrot] = [newnexttmno,newnextrot];
