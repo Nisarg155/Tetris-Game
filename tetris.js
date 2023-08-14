@@ -202,6 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             draw_next();
             score();
+            gameover();
         }
     }
 
@@ -243,6 +244,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 squares = newsquares.concat(squares);
                 squares.forEach(cell => grid.appendChild(cell));
             }
+        }
+    }
+
+    //gameover
+    function gameover(){
+        if(rotation.some(index=>squares[currentpos+index].classList.contains('taken'))){
+            ScoreDisplay.innerHTML = "Game Over";
+            clearInterval(timerID);
         }
     }
 
