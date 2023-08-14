@@ -26,10 +26,13 @@ body{
 /*give color and size to start button id start present inside score_id  */
 #start{
     background-color: orange;
-    border: none;
+    border: 1px gray solid;
     font-size: medium;
     height: 30px;
     font-style: italic;
+    border-radius: 5px;
+    margin-top: 20px;
+    
 }
 
 .container{
@@ -44,14 +47,14 @@ height: 100vh;
 .grid{
     width: 420px;
     height: 840px;
-    background-color:white;
+    background-color:#f5deb3;
     display: flex;
     flex-wrap: wrap;
     border:gray 1px solid;
     border-radius: 5px;
 }
 
-.grid div {
+.not_taken {
     height: 40px;
     width: 40px;
     border-radius: 5px;
@@ -64,8 +67,9 @@ height: 100vh;
 
 .mini_grid{
     margin-left:50px;
-    width: 160px;
-    height: 160px;
+    width: 168px;
+    height: 168px;
+    border-radius: 5px;
     display: flex;
     flex-wrap: wrap;
     background-color: white;
@@ -74,4 +78,6 @@ height: 100vh;
 .mini_grid div{
         height: 40px;
         width: 40px;
+        border:1px solid gray ;
+        border-radius: 5px;
 }
