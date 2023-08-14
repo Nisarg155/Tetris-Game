@@ -1,3 +1,5 @@
+// writing an js file for tetris game 
+
 document.addEventListener('DOMContentLoaded',() => {
     const width = 10;
     const gird = document.querySelector(".grid");
@@ -42,7 +44,8 @@ document.addEventListener('DOMContentLoaded',() => {
     ]
 
     const tetraminos = [ltmno,ztmno,ttmno,stmno,itmno];
-
+    let tmno ;
+    let rot;
     function random_pos( )
     {
         return parseInt(Math.random()*10%7);
@@ -50,12 +53,15 @@ document.addEventListener('DOMContentLoaded',() => {
 
     function random_rotation()
     {
-        return tetraminos[parseInt(Math.random()*10%5)][parseInt(Math.random()*10%4)];
+        tmno = parseInt(Math.random()*10%5);
+        rot = parseInt(Math.random()*10%4);
+        return tetraminos[tmno][rot];
     }
 
     let  currentpos = random_pos(); 
     
     let rotation = random_rotation();
+    
     function draw()
     {
         rotation.forEach(index =>{
@@ -71,7 +77,7 @@ document.addEventListener('DOMContentLoaded',() => {
         })
     }
     
-    let timerID = setInterval(moveDown,200); 
+    let timerID = setInterval(moveDown,500); 
     document.addEventListener('keyup',control)
     function control(events)
     {
@@ -79,6 +85,19 @@ document.addEventListener('DOMContentLoaded',() => {
         {
             moveLeft();
         }
+        else if(events.key === "ArrowRight")
+        {
+            moveRight();
+        }
+        else if(events.key === "ArrowUp")
+        {
+            rotate();
+        }
+        else if(events.key === "ArrowDown")
+        {
+            moveDown();
+        }
+    
     }
     
     function moveDown() {
@@ -90,31 +109,50 @@ document.addEventListener('DOMContentLoaded',() => {
         draw();
         freez();
     }
-    
 
-
-    function moveLeft()
-    {
+    function moveRight() {
         undraw();
-        const con1 = rotation.some(index => {
-            (index + currentpos)%width === 0
-        })
-
-        let con2 = rotation.some(index => {
-            squares[index + currentpos ].classList.contains('taken');
-        })
-
-        if(!con1)
-        {
-            console.log('corner');
+        const isAtRightEdge = rotation.some(index => (currentpos + index) % width === width - 1);
+        if (!isAtRightEdge) {
+            currentpos += 1;  
         }
-        
+        if (rotation.some(index => squares[currentpos + index].classList.contains('taken'))) {
+            currentpos -= 1;
+
+        }
+        draw();
+    }
     
-        if(con2)
+
+
+    function moveLeft() {
+        undraw();
+        const isAtLeftEdge = rotation.some(index => (currentpos + index) % width === 0);
+        if (!isAtLeftEdge) {
+            currentpos -= 1;
+        }   
+        if (rotation.some(index => squares[currentpos + index].classList.contains('taken'))) {
+            currentpos += 1;
+        }
+        draw();
+    }
+
+    function rotate(){
+        undraw();
+        
+        const isAtLeftEdge = rotation.some(index => (currentpos + index) % width === 0);
+        const isAtRightEdge = rotation.some(index => (currentpos + index) % width === width - 1);
+        if(!isAtLeftEdge  && !isAtRightEdge)
         {
-            console.log('taken');
+            rot = (rot+1)%4;
         }
 
+        rotation = tetraminos[tmno][rot];
+        if(rotation.some(index => squares[currentpos + index].classList.contains('taken')))
+        {
+            rot = (rot+3)%4;
+            rotation = tetraminos[tmno][rot];
+        }
         draw();
     }
 
