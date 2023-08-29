@@ -1,8 +1,16 @@
 /* Set the root font size to provide a baseline for rem units */
+/* Set the root font size to provide a baseline for rem units */
 html {
-    font-size: 16px;
-  }
-  
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* ... (rest of your CSS) ... */
+
   body {
     background-image: url(background.jpeg);
     /* adjust background image to fit the page */
